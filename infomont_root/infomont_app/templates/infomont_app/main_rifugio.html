@@ -1,0 +1,112 @@
+{% extends "base_template.html" %}
+{% block content %}
+
+<style>
+/* Sidebar Styles */
+
+.sidebar-nav {
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: black;
+}
+
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    color: #222;
+    background: rgba(255,255,255,0.5);
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+    color: #999999;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+    color: #fff;
+    background: none;
+}
+
+</style>
+
+<div class="container" style="width:80%;">
+    <div class="col-md-3" style="padding: 10px 20px;">
+        <p>Nome</p>    
+    </div> 
+    <div class="col-md-3" style="padding: 10px 20px;">
+        <p>Nome</p>    
+    </div> 
+    <div class="col-md-3" style="padding: 10px 20px;">
+        <p>Nome</p>    
+    </div> 
+    <div class="col-md-3" style="padding: 10px 20px;">
+        <p>Nome</p>    
+    </div>
+    <div class="col-md-3" style="padding: 10px 20px;">
+        <p>Nome</p>    
+    </div>
+    <div class="col-md-3" style="padding: 10px 20px;">
+        <p>Nome</p>    
+    </div>
+</div>
+<div class="container" style="width:100%;">
+      
+  <div class="col-sm-3" >
+      <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li>
+                    <a href="#">Dashboard</a>
+                </li>
+                <li>
+                    <a href="#">Shortcuts</a>
+                </li>
+                <li>
+                    <a href="#">Overview</a>
+                </li>
+                <li>
+                    <a href="#" >Events</a>
+                </li>
+             <hr style="border-top:1px solid #222;">
+                <li>
+                    <a href="#">About</a>
+                </li>
+                <li>
+                    <a href="#">Services</a>
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+    </div><!-- /.blog-sidebar -->
+
+    <div class="col-sm-9" style="background:white;">
+        <p>testotestotestotestotesto testotestotestotesto testotestotesto testotestotestotestotestotestotesto testotestotestotestotesto testotestotesto testo testo</p>
+    </div><!-- /.blog-main -->
+    
+</div><!-- row -->
+   
+{% endblock %}

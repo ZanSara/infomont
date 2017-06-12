@@ -1,4 +1,11 @@
 env/
 flask_version/
+
 infomont_root/infomont/__pycache__/
+
 infomont_root/polls/__pycache__/
+infomont_root/polls/migrations/__pycache__/
+
+infomont_root/infomont_app/__pycache__/
+infomont_root/infomont_app/migrations/__pycache__/
+infomont_root/infomont_app/static/infomont_app/bootstrap/

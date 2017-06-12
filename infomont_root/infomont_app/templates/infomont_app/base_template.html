@@ -1,0 +1,145 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <meta name="description" content="Infomont - Sistema Informativo Rifugi del Club Alpino Italiano">
+    <meta name="author" content="">
+    <link rel="icon" href="{% static 'infomont_app/img/CAILogo.png' %}">
+
+    <title>{{ title }} - Infomont</title>
+
+    <!-- Bootstrap core CSS (offline) -->
+    <link rel="stylesheet" href="{% static 'infomont_app/bootstrap/css/bootstrap.min.css' %}">
+    
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{% static 'infomont_app/css/style.css' %}">
+    <script type="text/javascript" src="{% static 'infomont_app/js/utils.js' %}"></script>
+    
+    <!-- Offline Bootstrap and jQuery js -->
+    <script src="{% static 'infomont_app/bootstrap/jQuery/jquery-2.2.4.min.js' %}"></script>
+    <script src="{% static 'infomont_app/bootstrap/js/bootstrap.min.js' %}"></script>
+    
+  </head>
+  
+  <body style="background-color:black;">
+  
+    <style>
+    div{
+        bborder:1px solid red;
+    }
+    
+    body > .content{
+        padding-top:50px;
+    }
+    
+    .navbar, .navbar-container, .navbar-header{
+        height:70px;
+    }
+    
+    .navbar-brand{
+        outline-style: none; 
+        -moz-outline-style:none;
+    }
+    
+    .nav-table-header td{
+        border-bottom:1px solid gray;
+    }
+    
+    .btn-black, .btn-black:hover, .btn-black:focus, .btn-black:active, .btn-black.active, .btn-black:active:focus {
+        color: white;
+        background-color: #222;
+        outline-style: none; 
+        -moz-outline-style:none;
+    }
+    
+    .btn-gray, .btn-gray:hover, .btn-gray:focus, .btn-gray:active, .btn-gray.active, .btn-gray:active:focus {
+        color: black;
+        background-color: #eee;
+        outline-style: none; 
+        -moz-outline-style:none;
+    }
+    
+    </style>
+      
+     <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container navbar-container" style="width:90%;">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/" style="height:70px;">
+            <img src="{% static 'infomont_app/img/InfomontLogo.png' %}" style="height:40px;">
+          </a>
+        </div>
+        <div class="navbar-header pull-right">
+          <button type="button" class="btn btn-black" style="margin: 15px; padding:10px 20px;" 
+                    data-container="body" 
+                    data-toggle="popover" 
+                    data-placement="bottom"
+                    data-trigger="focus"
+                    data-html="true"
+                    data-template='<div class="popover" role="tooltip" style="background-color:#222;color:white;width:200px;">
+                                      <div class="arrow-inverse"></div>
+                                      <h3 class="popover-title"></h3>
+                                      <div class="popover-content text-center"></div>
+                                   </div>'data-content='<p>Nome Utente</p>
+                                  <a href=#>Logout</a>'>
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>   
+            Utente Loggato
+          </button>
+        </div>
+      </div>
+      
+      {% if not home %}
+      <div class="container" style="background-color:#efefef; width:90%;">
+        <a href="#" class="btn btn-gray" style="margin: 0; padding:17px 15px; font-size:12pt;"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>   Lista</a>
+        <a href="#" class="btn btn-gray" style="margin: 0; padding:17px 15px; font-size:12pt;"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span>   Mappa</a>
+      
+      
+        <!--a href="#" class="btn btn-default" style="margin: 15px; padding:10px 20px;"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>   Lista</a>
+        <a href="#" class="btn btn-default"  style="margin: 15px; padding:10px 20px;"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span>   Mappa</a-->
+      </div>
+      <table class="table nav-table-header" style="background:white;width:100%;">
+        <tr>
+           <td>Nome</td>
+           <td>Localita'</td>
+           <td>Sezione</td>
+           <td>Gruppo Regionale</td>
+        <tr>
+      </table>
+      
+      {% else %}
+      
+      <div class="container" style="background-color:#efefef; width:100%; padding-left:5%; border-bottom:1px solid #bbb;">
+        <a href="#" class="btn btn-gray" style="margin: 0; padding:20px 30px;"><span class="glyphicon glyphicon-arrow-back" aria-hidden="true"></span>   Indietro</a>
+      </div>
+      
+      {% endif %}
+    </nav>
+
+
+
+    <div class="content {{background_class}}" style="padding: {% if not home %}190px{% else %}150px{% endif %} 0 0 0; {% if not background_class %} background-color:#efefef;{% endif %}">
+      {% block content %}
+      {% endblock %}
+    </div> 
+    
+    
+
+     <footer class="footer text-center" style="background:black; color:white; margin:0; padding:20px;">
+      <div class="container">
+        <p>Infomont - Sistema Informativo C.A.I.</p>
+      </div>
+    </footer>
+
+
+    </div> <!-- /container -->
+    
+    <script>
+        $(".btn-black").popover();
+    </script>
+
+  </body>
+</html>
