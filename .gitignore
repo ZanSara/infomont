@@ -1,3 +1,4 @@
 env/
 flask_version/
 infomont_root/infomont/__pycache__/
+infomont_root/polls/__pycache__/
