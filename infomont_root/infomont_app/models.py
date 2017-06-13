@@ -34,9 +34,9 @@ class Rifugio(models.Model):
     localita        = models.CharField("Località", max_length=800, default=EMPTY_CHARFIELD) # Doppio in Dati Geografici
     sezione         = models.CharField("Sezione", max_length=200, default=EMPTY_CHARFIELD)
     regione         = models.CharField("Regione", max_length=200, default=EMPTY_CHARFIELD)
-    tipo_rifugio    = models.CharField("Tipo Rifugio", max_length=1, choices=TIPO_RIFUGIO, default="Bivacco")
+    tipo_rifugio    = models.CharField("Tipo Rifugio", max_length=15, choices=TIPO_RIFUGIO, default="Bivacco")
     #proprieta = ?
-    categoria_cai   = models.CharField("Categoria CAI", max_length=1, choices=CAT_CAI, default="E")
+    categoria_cai   = models.CharField("Categoria CAI", max_length=15, choices=CAT_CAI, default="E")
     data_inserimento    = models.DateTimeField(("Data Inserimento"))
     data_aggiornamento  = models.DateTimeField(("Data Aggiornamento"))
     
@@ -54,6 +54,10 @@ class Rifugio(models.Model):
     valle       = models.CharField("Valle", max_length=200,                     default=EMPTY_CHARFIELD) 
     quota       = models.IntegerField("Quota",                                  default="0")
     utm_wgs84   = models.DecimalField("UTM WGS84", max_digits=5, decimal_places=5, default="0")  # Cosa sei?
+    
+    # Dati Geografici - Coordinate geografiche (non visualizzate se non nelle mappe)
+    latitudine = models.DecimalField("Latitudine", max_digits=9, decimal_places=6)
+    longitudine = models.DecimalField("Longitudine", max_digits=9, decimal_places=6)
     
     # Dati Geografici - Altro
     zona_tutelata   = models.CharField("Zona Tutelata", max_length=200,         default=EMPTY_CHARFIELD)
@@ -78,7 +82,7 @@ class Rifugio(models.Model):
     #    ANNO_CHOICES.append((r,r))
     #anno_costruzione = models.IntegerField(('Anno di Costruzione'), max_length=4, choices=ANNO_CHOICES, default=datetime.datetime.now().year)
     
-    #tipo_regionale = models.CharField("Tipo Rifugio (secondo legge regionale)", max_length=1, choices=TIPO_REG)
+    #tipo_regionale = models.CharField("Tipo Rifugio (secondo legge regionale)", max_length=15, choices=TIPO_REG)
     
     
     def __str__(self):

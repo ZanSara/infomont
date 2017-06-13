@@ -36,6 +36,12 @@ class MappaView(generic.ListView):
         context = super(MappaView, self).get_context_data(**kwargs)
         context['title'] = "Mappa Rifugi"
         context['home'] = 'mappa'
+        
+        context['coordinate'] = []
+        for rifugio in Rifugio.objects.all():
+            context['coordinate'].append( {'nome': rifugio.nome, 'id':rifugio.id, 'lat': rifugio.latitudine,'lng': rifugio.longitudine } )
+            
+        print(context['coordinate'])
         return context
 
 
@@ -75,8 +81,9 @@ class RifugioView(generic.DetailView):
         context['campi_barra'] = campi_barra
         context['paragrafi'] = paragrafi
         
-        context['latitudine'] = 46.3093808
-        context['longitudine'] = 9.7374249
+        if nome_pagina == "Dati Geografici":
+            context['latitudine'] = Rifugio.objects.filter(nome = context['rifugio'].nome)[0].__dict__['latitudine']
+            context['longitudine'] = Rifugio.objects.filter(nome = context['rifugio'].nome)[0].__dict__['longitudine']
         
         return context
         

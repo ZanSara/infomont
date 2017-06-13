@@ -6,7 +6,10 @@
         <script>
         
           function initMap() {
+          
             var rifugio = {lat: 46.3093808, lng: 9.7374249 };
+            var bounds = new google.maps.LatLngBounds();
+            
             var map = new google.maps.Map(document.getElementById('map'), {
               zoom: 11,
               center: rifugio,
@@ -15,11 +18,40 @@
                 },
               mapTypeId: google.maps.MapTypeId.TERRAIN
             });
-            var marker = new google.maps.Marker({
-              position: rifugio,
-              map: map
-            });
+            
+            var markers = []
+            var infoWindows = []
+            
+            {% for rifugio in coordinate %}
+                rifugio.lat = {{ rifugio.lat }}
+                rifugio.lng = {{ rifugio.lng }}
+                
+                var mark{{ forloop.counter }} =  new google.maps.Marker({
+                  position: rifugio,
+                  map: map
+                });
+                markers.push(mark{{ forloop.counter }});
+                
+                var info{{ forloop.counter }} = new google.maps.InfoWindow({
+                    content: "<h3>{{ rifugio.nome }}</h3><a href='rifugi/{{ rifugio.id }}/DatiGeografici'>Dettagli</a>"
+                })
+                infoWindows.push( info{{ forloop.counter }} );
+                 
+                bounds.extend(rifugio);
+                map.fitBounds(bounds);
+                
+                google.maps.event.addListener(mark{{ forloop.counter }}, 'click', function() {
+                    
+                    for (var i=0;i<infoWindows.length;i++) {
+                        infoWindows[i].close();
+                    }
+                    
+                    info{{ forloop.counter }}.open(map, mark{{ forloop.counter }} );   
+                });
+            {% endfor %}
+            
           }
+          
           
         </script>
         
