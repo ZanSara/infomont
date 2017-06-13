@@ -33,7 +33,7 @@
                 markers.push(mark{{ forloop.counter }});
                 
                 var info{{ forloop.counter }} = new google.maps.InfoWindow({
-                    content: "<h3>{{ rifugio.nome }}</h3><a href='rifugi/{{ rifugio.id }}/DatiGeografici'>Dettagli</a>"
+                    content: `{% include 'infomont_app/infoWindow.html' %}`
                 })
                 infoWindows.push( info{{ forloop.counter }} );
                  
