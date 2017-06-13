@@ -29,8 +29,8 @@
   <body style="background-color:black;">
   
     <style>
-    div{
-        bborder:1px solid red;
+    ddiv{
+        border:1px solid red;
     }
     
     body > .content{
@@ -57,11 +57,14 @@
         -moz-outline-style:none;
     }
     
-    .btn-gray, .btn-gray:hover, .btn-gray:focus, .btn-gray:active, .btn-gray.active, .btn-gray:active:focus {
+    .btn-gray {
         color: black;
         background-color: #eee;
         outline-style: none; 
         -moz-outline-style:none;
+    }
+    .btn-gray:hover, .btn-gray:focus, .btn-gray:active, .btn-gray.active, .btn-gray:active:focus {
+        background-color: #dfdfdf;
     }
     
     </style>
@@ -92,15 +95,13 @@
         </div>
       </div>
       
-      {% if not home %}
-      <div class="container" style="background-color:#efefef; width:90%;">
-        <a href="#" class="btn btn-gray" style="margin: 0; padding:17px 15px; font-size:12pt;"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>   Lista</a>
-        <a href="#" class="btn btn-gray" style="margin: 0; padding:17px 15px; font-size:12pt;"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span>   Mappa</a>
-      
-      
-        <!--a href="#" class="btn btn-default" style="margin: 15px; padding:10px 20px;"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>   Lista</a>
-        <a href="#" class="btn btn-default"  style="margin: 15px; padding:10px 20px;"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span>   Mappa</a-->
+      {% if home %}
+      <div class="container" style="background-color:rgba(0,0,0, 0); width:90%;">
+        <a href="lista" class="btn btn-gray" style="margin: 0; padding:17px 15px; font-size:12pt;"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>   Lista</a>
+        <a href="mappa" class="btn btn-gray" style="margin: 0; padding:17px 15px; font-size:12pt;"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span>   Mappa</a>
       </div>
+      
+      {% if home != 'mappa' %}
       <table class="table nav-table-header" style="background:white;width:100%;">
         <tr>
            <td>Nome</td>
@@ -109,19 +110,14 @@
            <td>Gruppo Regionale</td>
         <tr>
       </table>
-      
-      {% else %}
-      
-      <div class="container" style="background-color:#efefef; width:100%; padding-left:5%; border-bottom:1px solid #bbb;">
-        <a href="#" class="btn btn-gray" style="margin: 0; padding:20px 30px;"><span class="glyphicon glyphicon-arrow-back" aria-hidden="true"></span>   Indietro</a>
-      </div>
+      {% endif %}
       
       {% endif %}
     </nav>
 
 
 
-    <div class="content {{background_class}}" style="padding: {% if not home %}190px{% else %}150px{% endif %} 0 0 0; {% if not background_class %} background-color:#efefef;{% endif %}">
+    <div class="content {{background_class}}" style="padding: {% if home == 'lista' %}190px{% endif %}{% if home == 'mappa'%}70px{% endif %}{% if not home %}75px{% endif %} 0 0 0; {% if not background_class %} background-color:#efefef;{% endif %}">
       {% block content %}
       {% endblock %}
     </div> 

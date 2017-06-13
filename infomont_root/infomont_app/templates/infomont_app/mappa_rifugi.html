@@ -1,0 +1,31 @@
+{% extends "infomont_app/base_template.html" %}
+{% block content %}
+
+        <div id="map" style="height: 79vh; width: 100%; margin:auto;"></div>
+        
+        <script>
+        
+          function initMap() {
+            var rifugio = {lat: 46.3093808, lng: 9.7374249 };
+            var map = new google.maps.Map(document.getElementById('map'), {
+              zoom: 11,
+              center: rifugio,
+              mapTypeControlOptions: {
+                    mapTypeIds: [google.maps.MapTypeId.TERRAIN]
+                },
+              mapTypeId: google.maps.MapTypeId.TERRAIN
+            });
+            var marker = new google.maps.Marker({
+              position: rifugio,
+              map: map
+            });
+          }
+          
+        </script>
+        
+        <!-- Protect the key!! -->
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCc7S8mm7MKiAZIzSY7okEwxsA9Q6_hnD0&callback=initMap"></script>
+
+    
+    
+{% endblock %}

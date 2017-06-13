@@ -5,9 +5,9 @@ from . import views
 app_name = 'infomont'
 
 urlpatterns = [
-    url(r'^$', views.IndexView.as_view(), name='list'),
-    url(r'^lista$', views.IndexView.as_view(), name='list'),
-    url(r'^mappa$', views.IndexView.as_view(), name='list'), # cambiami quando la mappa va
-    url(r'^rifugi/(?P<pk>[0-9]+)/main$', views.DetailView.as_view(), name='details'),
+    url(r'^$', views.ListaView.as_view(), name='home'),
+    url(r'^lista$', views.ListaView.as_view(), name='lista'),
+    url(r'^mappa$', views.MappaView.as_view(), name='mappa'),
+    url(r'^rifugi/(?P<pk>[0-9]+)/(?P<pagina>\w+)$', views.RifugioView.as_view(), name='dettagli_rifugio'),
 ]
 

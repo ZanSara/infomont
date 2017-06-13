@@ -18,63 +18,22 @@
     
     <div style="height:55vh; overflow-y:scroll;">
     <table class="table table-hover center" style="background:white;width:100%;margin:0;">
+        {% for rifugio in object_list %}
+        <tr onclick="javascript:window.location = 'rifugi/{{ rifugio.id }}/DatiGeografici';">
+           <td>{{ rifugio.nome }}</td>
+           <td>{{ rifugio.localita }}</td>
+           <td>{{ rifugio.sezione }}</td>
+           <td>{{ rifugio.regione }}</td>
         <tr>
-           <td>rifugio Camerini</td>
-           <td>valmalencovalmalencovalmalencovalmalencovalmalencovalmalencovalmalencovalmalencovalmalencovalmalencovalmalencovalmalencovalmalenco</td>
-           <td>Sovico</td>
-           <td>Lombardia</td>
+        {% empty %}
         <tr>
+           <td>Nessun Rifugio!</td>
+           <td>---</td>
+           <td>---</td>
+           <td>---</td>
         <tr>
-           <td>rifugio Camerini</td>
-           <td>valmalenco</td>
-           <td>Sovico</td>
-           <td>Lombardia</td>
-        <tr>
-        <tr>
-           <td>rifugio Camerini</td>
-           <td>valmalenco</td>
-           <td>Sovico</td>
-           <td>Lombardia</td>
-        <tr>
-        <tr>
-           <td>rifugio Camerini</td>
-           <td>valmalenco</td>
-           <td>Sovico</td>
-           <td>Lombardia</td>
-        <tr>
-        <tr>
-           <td>rifugio Camerini</td>
-           <td>valmalenco</td>
-           <td>Sovico</td>
-           <td>Lombardia</td>
-        <tr>
-        <tr>
-           <td>rifugio Camerini</td>
-           <td>valmalenco</td>
-           <td>Sovico</td>
-           <td>Lombardia</td>
-        <tr>
-
+        {% endfor %}
       </table>
       </div>
-        
-     <script>
-    
-        window.addEventListener('DOMContentLoaded', function () {
-            $("tr").click(function(){
-                console.log("works");
-                window.location = "rifugi/1/main";
-            });
-            
-            $(function () {
-              $('[data-toggle="popover"]').popover()
-            })
-            
-        })
-        
-        
-        
-    </script>
-    
     
 {% endblock %}

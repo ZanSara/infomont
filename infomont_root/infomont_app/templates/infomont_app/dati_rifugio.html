@@ -1,0 +1,187 @@
+{% extends "infomont_app/base_template.html" %}
+{% block content %}
+
+<style>
+/* Sidebar Styles */
+
+.sidebar-nav {
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: black;
+}
+
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    color: #222;
+    background: rgba(255,255,255,0.5);
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+    color: #999999;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+    color: #fff;
+    background: none;
+}
+
+.pagina {
+    width:95%;
+    font-size:12pt;
+}
+.pagina td:first-child{
+    width:30%;
+}
+.pagina td:nth-child(2){
+    width:70%;
+}
+
+.blue{
+    color: #44b;
+}
+
+h3 {
+    padding: 10px 20px;
+}
+
+.glyphicon{
+    margin-right: 10px;
+    font-size:14pt;
+}
+</style>
+
+
+<div style="border-bottom:1px solid gray;">
+
+    <div class="container" style="width:90%;">
+        <div class="col-md-2" style="padding: 10px;">
+            <a href="/lista" class="btn btn-gray" style="border:1px solid gray; margin:0; font-size:12pt;"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>   Indietro</a>
+        </div> 
+        <div class="col-lg-10 col-md-10" style="padding: 10px 0;">
+            <h4><b>{{ object.nome }}</b> ({{ object.localita }}, Sezione di {{ object.sezione }})</h4>    
+        </div> 
+        
+        
+        {% for field in campi_barra %}
+        <div class="col-lg-2 col-md-2" style="padding:5px !important; margin:0; text-align:right;">
+            <p>{{ field.nome }}:</p>    
+        </div>
+        <div class="col-lg-2 col-md-2" style="padding:5px !important; margin:0;">
+            <p><b>{{ field.valore }}</b> </p>
+        </div> 
+        {% endfor %}
+        
+    </div>
+</div>
+
+
+
+
+<div class="container" style="width:100%;margin:0;padding:0!important;">
+
+  <div class="col-lg-3 col-md-3" style="padding-top:20px;">
+      <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+            
+                {% for gruppo in gruppi %}
+                    
+                    <li>
+                       <p class="blue" style="font-size:12pt; margin:0 !important;">{{ gruppo.nome }}</p>
+                    </li>
+                    
+                    {% for pagina in gruppo.pagine %}
+                    <li>
+                        <a href="{{ pagina.nome|cut:' ' }}" style="padding-left:0px;">
+                            <span class="glyphicon glyphicon-{{ pagina.glyph }}" aria-hidden="true"></span>
+                            {{ pagina.nome }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                    
+                {% endfor %}
+                
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+    </div><!-- /.blog-sidebar -->
+
+    <div class="col-lg-9 col-md-9" style="min-height:60vh; margin:0; background:white; border-left:1px solid gray; padding-left:50px;">
+        {% for paragrafo in paragrafi %}
+            
+            <h3 class="blue" style="padding-left:0;">{{ paragrafo.nome }}</h3>
+                
+                <table class=" pagina table table-borderless">
+                {% for campo in paragrafo.campi %}
+                    <tr>
+                        <td>{{ campo.nome }}</td>
+                        <td>{{ campo.valore }}</td>
+                    </tr>
+                
+                {% endfor %}
+                </table>
+                <!--div class="col-lg-3 col-md-3" sstyle="padding:5px !important; margin:0; text-align:right;">
+                    <p>{{ campo.nome }}:</p>    
+                </div>
+                <div class="col-lg-9 col-md-9" sstyle="padding:5px !important; margin:0;">
+                    <p><b>{{ campo.valore }}</b> </p>
+                </div--> 
+                
+        {% endfor %}   
+        
+        {% if nome_pagina == "Dati Geografici" %}    
+        
+            <h3 class="blue" style="padding-left:0;">Mappa</h3>
+        
+            <div id="map" style="height: 600px;width: 100%;"></div>
+            <script>
+              function initMap() {
+                var rifugio = {lat: {{ latitudine }}, lng: {{ longitudine }} };
+                var map = new google.maps.Map(document.getElementById('map'), {
+                  zoom: 11,
+                  center: rifugio,
+                  mapTypeControlOptions: {
+                        mapTypeIds: [google.maps.MapTypeId.TERRAIN]
+                    },
+                  mapTypeId: google.maps.MapTypeId.TERRAIN
+                });
+                var marker = new google.maps.Marker({
+                  position: rifugio,
+                  map: map
+                });
+              }
+            </script>
+            
+            <!-- Protect the key!! -->
+            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCc7S8mm7MKiAZIzSY7okEwxsA9Q6_hnD0&callback=initMap"></script>
+            
+        {% endif %}
+        
+    </div><!-- main -->
+    
+</div><!-- row -->
+   
+{% endblock %}
