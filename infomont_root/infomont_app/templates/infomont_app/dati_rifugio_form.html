@@ -71,6 +71,10 @@ h3 {
     margin-right: 10px;
     font-size:14pt;
 }
+
+input[type='text']{
+    width:100%;
+}
 </style>
 
 
@@ -122,7 +126,7 @@ h3 {
                     
                     {% for pagina in gruppo.pagine %}
                     <li>
-                        <a href="{{ pagina.nome|cut:' ' }}" style="padding-left:0px;">
+                        <a href="/rifugi/{{ rifugio.id }}/{{ pagina.nome|cut:' ' }}" style="padding-left:0px;">
                             <span class="glyphicon glyphicon-{{ pagina.glyph }}" aria-hidden="true"></span>
                             {{ pagina.nome }}
                         </a>
@@ -138,57 +142,16 @@ h3 {
 
     <div class="col-lg-9 col-md-9" style="min-height:67vh; margin:0; background:white; border-left:1px solid gray; padding-left:50px;">
     
-        <a href="{{pagina_url}}/edit" class="btn btn-gray pull-right" style="margin:10px;">Edit</a>
-    
-        {% for paragrafo in paragrafi %}
-            
-            <h3 class="blue" style="padding-left:0;">{{ paragrafo.nome }}</h3>
-                
-                <table class=" pagina table table-borderless">
-                {% for campo in paragrafo.campi %}
-                    <tr>
-                        <td>{{ campo.nome }}</td>
-                        <td>{{ campo.valore }}</td>
-                    </tr>
-                
-                {% endfor %}
-                </table>
-                <!--div class="col-lg-3 col-md-3" sstyle="padding:5px !important; margin:0; text-align:right;">
-                    <p>{{ campo.nome }}:</p>    
-                </div>
-                <div class="col-lg-9 col-md-9" sstyle="padding:5px !important; margin:0;">
-                    <p><b>{{ campo.valore }}</b> </p>
-                </div--> 
-                
-        {% endfor %}   
+        <h3 class="blue">Modifica</h3>
+        <form method="post" style="margin-bottom:30px;">
+            {% csrf_token %}
+            <table class="table">
+            {{ form }}
+            </table>
+            <input class="btn btn-primary" type="submit" value="Salva" />
+            <a href="../{{ url_pagina }}" class="btn btn-gray pull-right">Annulla</a>
+        </form>
         
-        {% if nome_pagina == "Dati Geografici" %}    
-        
-            <h3 class="blue" style="padding-left:0;">Mappa</h3>
-        
-            <div id="map" style="height: 600px;width: 100%;"></div>
-            <script>
-              function initMap() {
-                var rifugio = {lat: {{ latitudine }}, lng: {{ longitudine }} };
-                var map = new google.maps.Map(document.getElementById('map'), {
-                  zoom: 11,
-                  center: rifugio,
-                  mapTypeControlOptions: {
-                        mapTypeIds: [google.maps.MapTypeId.TERRAIN]
-                    },
-                  mapTypeId: google.maps.MapTypeId.TERRAIN
-                });
-                var marker = new google.maps.Marker({
-                  position: rifugio,
-                  map: map
-                });
-              }
-            </script>
-            
-            <!-- Protect the key!! -->
-            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCc7S8mm7MKiAZIzSY7okEwxsA9Q6_hnD0&callback=initMap"></script>
-            
-        {% endif %}
         
     </div><!-- main -->
     
